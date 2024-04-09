@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link href="{% static 'index/css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        body {
+  margin: 0;
+  color: white;
+  font-family: 'Electrolize', sans-serif;
+<!--  background-image: url(http://www.newhdwallpapers.in/wp-content/uploads/2014/04/Dandelion-at-Sunset-Nature-HD-Wallpaper.jpg);-->
+<!--  background-size: cover;-->
+  background-color: black;
+
+}
+
+.align-center {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  width: 500px;
+  height: 300px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 0 #222, 2px 2px 15px rgba(0,0,0,0.9);
+  background: black;
+  background: -webkit-linear-gradient(left, #000000, #282828);
+  background: -o-linear-gradient(right, #000000, #282828);
+  background: -moz-linear-gradient(right, #000000, #282828);
+  background: linear-gradient(to right, #000000, #282828)
+}
+
+.form {
+  padding-top: 110px;
+}
+
+
+
+.logo {
+  float: right;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+label {
+  display: block;
+}
+
+.card-number {
+  float: left;
+  margin-left: 15px;
+  margin-bottom: 10px;
+  color: white;
+}
+.card-number input {
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  font-family: 'Electrolize', sans-serif;
+  color: #fff;
+}
+
+.card-name {
+  clear: both;
+  float: left;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.card-name input {
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-family: 'Electrolize', sans-serif;
+}
+
+input:focus {
+  color: #fff;
+  outline: none;
+  border-bottom: 1px solid white;
+}
+
+.select-day {
+  clear: both;
+  float: left;
+  margin-left: 15px;
+}
+
+.card-cvc {
+  float: right;
+  margin-right: 15px;
+}
+
+.card-cvc input {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'Electrolize', sans-serif;
+}
+
+select {
+  border: none;
+  background-color: rgba(255,255,255, 0.2);
+  color: #fff;
+}
+
+option {
+  color: #000000;
+}
+
+.buy-button {
+  font-family: 'Electrolize', sans-serif;
+  cursor: pointer;
+  position: relative;
+  margin-top: auto;
+  margin-left: 64px;
+  margin-right: -100px;
+  padding: 10px 10px;
+  border-radius: 6px;
+  box-shadow: -2px 0px 6px 1px #000000;
+  background-color: #FFAB40;
+  border:none;
+  color: #fff;
+}
+
+.buy-button:hover {
+  background-color: #66BB6A;
+  transition: linear 0.2s;
+}
+
+
+    </style>
+    <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <!-- Mobile Metas -->
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+  <!-- Site Metas -->
+  <meta content="" name="keywords" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
+  <link href="{% static 'index/images/icons8-ticket-48.png' %}" rel="shortcut icon" type="image/x-icon">
+
+  <title>
+    SeatWise
+  </title>
+
+  <!-- slider stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- bootstrap core css -->
+<!--  <link href="{% static 'index/css/bootstrap.css' %}" rel="stylesheet" type="text/css" />-->
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'index/css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'index/css/responsive.css' %}" rel="stylesheet" />
+</head>
+<body style="background-image: url('{% static 'images/114.jpg' %}')">
+<div class="hero_area" >
+    <!-- header section strats -->
+    <header class="header_section" >
+      <nav class="navbar navbar-expand-lg custom_nav-container " >
+        <a class="navbar-brand" href="index.html" >
+          <span>
+            SeatWise
+          </span>
+        </a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+          <span class=""></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color:black;">
+          <ul class="navbar-nav  ">
+                    <li class="nav-item ">
+                        <a class="nav-link active" href="http://127.0.0.1:8000/seatwiseapp/index/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/seatwiseapp/carddisplay/">
+                            Movies
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="http://127.0.0.1:8000/seatwiseapp/test/">Tickets <span class="sr-only"></span></a>
+                    </li>
+
+                </ul>
+
+        </div>
+      </nav>
+    </header>
+    <!-- end header section -->
+  </div>
+<div class="container">
+  <div class="row">
+    {% for i, j, k, l, m in list %}
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card" style="width: 221px; margin-top: 15px; border-radius: 8px; background-color: black; color: white;">
+        <div class="card-header"></div>
+        <div class="card-body">
+          <h4 class="card-text">movie: {{ i }}</h4>
+          <h4 class="card-title">Date: {{ j }}</h4>
+          <h4 class="card-text">Time: {{ k }}</h4>
+          <h4 class="card-text">Seats: {{ l }}</h4>
+
+
+        </div>
+        <div class="card-footer">
+          <a href="http://127.0.0.1:8000/seatwiseapp/delete/{{m}}" class="btn btn-danger btn-block">Cancel Ticket</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+document.getElementById('number').addEventListener('input', function (e) {
+  var input = e.target;
+  var value = input.value.replace(/\D/g, ''); // Remove non-numeric characters
+  var formattedValue = '';
+
+  // Ensure the input doesn't exceed 16 digits
+  if (value.length > 16) {
+    value = value.slice(0, 16);
+  }
+
+  for (var i = 0; i < value.length; i++) {
+    if (i % 4 === 0 && i !== 0) {
+      formattedValue += ' '; // Add a space after every four numbers
+    }
+    formattedValue += value[i];
+  }
+
+  input.value = formattedValue;
+});
+
+document.getElementById('cvc').addEventListener('input', function (e) {
+  var input = e.target;
+  var value = input.value;
+
+  // Remove non-digit characters
+  value = value.replace(/\D/g, '');
+
+  // Update the input value with the cleaned value
+  input.value = value;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!-- ... Your existing head content ... -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Selection</title>
+    <style>
+        /* ... Your existing styles ... */
+body {
+      overflow-x: scroll;
+      white-space: nowrap;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+       font-family: 'Sans-serif', sans-serif;
+    }
+    .seat {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      background-color: #ccc;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .row {
+      margin-bottom: 20px;
+    }
+    #A1:hover,#A2:hover,#A3:hover,#A4:hover,#A5:hover,
+    #B1:hover,#B2:hover,#B3:hover,#B4:hover,#B5:hover,
+    #C1:hover,#C2:hover,#C3:hover,#C4:hover,#C5:hover,
+    #D1:hover,#D2:hover,#D3:hover,#D4:hover,#D5:hover,
+    #E1:hover,#E2:hover,#E3:hover,#E4:hover,#E5:hover,
+    #F1:hover,#F2:hover,#F3:hover,#F4:hover,#F5:hover,
+    #G1:hover,#G2:hover,#G3:hover,#G4:hover,#G5:hover,
+    #H1:hover,#H2:hover,#H3:hover,#H4:hover,#H5:hover{
+    transform:translate(-5px,-10px)
+    }
+    .group-container {
+      display: inline-block;
+      margin-right: 20px;
+    }
+    .spacer {
+      width: 40px;
+      display: inline-block;
+    }
+    .selected {
+      background-color: #FEE6B7;
+    }
+    /* Additional styles for Bootstrap components */
+    #selectedSeats {
+      color: white;
+      font-size: 18px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+    #confirmButton {z
+      margin-top: 10px;
+    }
+
+
+.custom-select-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+<!--            background: rgba(0, 0, 0, 0.8);-->
+            color: white;
+            width:30%;
+            border-radius:5px
+
+        }
+
+        .custom-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            background-color: #333;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: border-color 0.15s;
+        }
+
+        .custom-select:focus {
+            border-color: #007bff; /* Change to your preferred focus color */
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Change to your preferred focus shadow */
+        }
+
+
+button {
+ padding: 0.8em 1.8em;
+ border: 2px solid #FEE6B7;
+ position: relative;
+ overflow: hidden;
+ background-color: transparent;
+ text-align: center;
+ text-transform: uppercase;
+ font-size: 16px;
+ transition: .3s;
+ z-index: 1;
+ font-family: inherit;
+ color: #FEE6B7;
+}
+
+button::before {
+ content: '';
+ width: 0;
+ height: 300%;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%) rotate(45deg);
+ background: #FEE6B7;
+ transition: .5s ease;
+ display: block;
+ z-index: -1;
+}
+
+button:hover::before {
+ width: 105%;
+}
+
+button:hover {
+ color: #111;
+}
+    </style>
+</head>
+<body style="background-image: url('{% static 'images/117.jpg' %}')">
+<form method="post"> {% csrf_token %}
+                     <!-- ... Your left dropdown content ... -->
+    <center>
+       <div class="custom-select-container" style="background-color:black">
+            <div class="container" >
+                <h2 style="color: white;">Choose Date and Time</h2>
+
+                <div class="container" style="float:left">
+                <select name="date" id="date" class="custom-select">
+                    <option value="WED-4">WED 4</option>
+                    <option value="WED-5">THU 5</option>
+                    <option value="WED-6">FRI 6</option>
+                    <option value="WED-7">SAT 7</option>
+                    <option value="WED-7">SUN 8</option>
+
+                </select>
+                    </div>
+
+                <!-- Your right dropdown content -->
+                <div class="container" style="float:right">
+                <select name="time" id="time" class="custom-select">
+                    <option value="9AM">9AM</option>
+                    <option value="12PM">12PM</option>
+                    <option value="3PM">3PM</option>
+                    <option value="6PM">6PM</option>
+                    <option value="9PM">9PM</option>
+                </select>
+                    </div>
+            </div>
+       </div>
+        </center>
+
+
+<center>
+        <div style="background-color:#FEE6B7;width: 50%;height:30px; margin-top: 70px;border-radius: 50px;">
+            <center><h2>SCREEN</h2></center>
+        </div>
+
+        <div id="seatMap" style="margin-top: 110px;margin-left:-280px ">
+            <div class="row">
+                <div class="group-container">
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="seat" onclick="toggleSeat(this)" id="A1"
+                         style="border-radius: 15px 15px 5px 5px; text-align:center;box-shadow: 5px 10px;">A1
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="A2"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">A2
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="A3"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">A3
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="A4"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">A4
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="A5"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">A5
+                    </div>
+                </div>
+            </div>
+            <!-- More rows... -->
+            <div class="row">
+                <div class="group-container">
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="seat" onclick="toggleSeat(this)" id="B1"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">B1
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="B2"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">B2
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="B3"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">B3
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="B4"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">B4
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="B5"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">B5
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="group-container">
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="seat" onclick="toggleSeat(this)" id="C1"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">C1
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="C2"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">C2
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="C3"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">C3
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="C4"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">C4
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="C5"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">C5
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="group-container">
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="seat" onclick="toggleSeat(this)" id="D1"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">D1
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="D2"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">D2
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="D3"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">D3
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="D4"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">D4
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="D5"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">D5
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="group-container">
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="seat" onclick="toggleSeat(this)" id="E1"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">E1
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="E2"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">E2
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="E3"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">E3
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="E4"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">E4
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="E5"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">E5
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="group-container">
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="seat" onclick="toggleSeat(this)" id="F1"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">F1
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="F2"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">F2
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="F3"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">F3
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="F4"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">F4
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="F5"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">F5
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="group-container">
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="seat" onclick="toggleSeat(this)" id="G1"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">G1
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="G2"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">G2
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="G3"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">G3
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="G4"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">G4
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="G5"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">G5
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="group-container">
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="spacer"></div>
+                    <div class="seat" onclick="toggleSeat(this)" id="H1"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">H1
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="H2"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">H2
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="H3"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">H3
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="H4"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">H4
+                    </div>
+                    <div class="seat" onclick="toggleSeat(this)" id="H5"
+                         style="border-radius: 15px 15px 5px 5px;text-align:center;box-shadow: 5px 10px;">H5
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container1">
+            <div class="row">
+                <div class="col">
+
+                </div>
+                <div class="col">
+
+                </div>
+                <div class="col">
+                    <!-- ... Your existing content ... -->
+                    <div id="selectedSeats" style="color:white; margin-top:50px;"></div>
+                    <input type="text" id="selectedSeatsInput" name="selectedseats"><br><br>
+                    <a href="http://127.0.0.1:8000/seatwiseapp/ticket/{{a.id}}/{{selectedSeats}}">
+                        <button id="confirmButton" class="btn" onclick="confirmSeats()">Confirm</button>
+                    </a>
+                </div>
+<!--                <div class="col">-->
+<!--                    &lt;!&ndash; ... Your existing content ... &ndash;&gt;-->
+<!--                    <h1>Booked Seats</h1>-->
+<!--                    <input type="text" name="booked"-->
+<!--                           value="{% for seat in booked_seats %}{{ seat }}{% if not forloop.last %}, {% endif %}{% endfor %}">-->
+<!--                </div>-->
+            </div>
+        </div>
+        <!-- ... Your existing content ... -->
+        <script>
+    var selectedSeats = []; // Array to store selected seat IDs
+
+    function toggleSeat(seat) {
+      seat.classList.toggle("selected");
+      var seatId = seat.id;
+
+      // Check if the seat ID is in the array
+      var index = selectedSeats.indexOf(seatId);
+      if (index !== -1) {
+        // If already selected, remove it from the array
+        selectedSeats.splice(index, 1);
+      } else {
+        // If not selected, add it to the array
+        selectedSeats.push(seatId);
+      }
+
+      // Update the selected seats display
+      updateSelectedSeatsDisplay();
+    }
+
+    function updateSelectedSeatsDisplay() {
+      var selectedSeatsDisplay = document.getElementById("selectedSeats");
+      var selectedSeatsInput = document.getElementById("selectedSeatsInput");
+      selectedSeatsDisplay.textContent = "Selected Seats: " + selectedSeats.join(", ");
+      selectedSeatsInput.value = selectedSeats.join(", ");
+      selectedSeatsDisplay.textContent = selectedSeatsString;
+      selectedSeatsDisplay.textContent = "Selected Seats: " + selectedSeats.join(", ");
+
+      return selectedSeatsString;
+    }
+    var seatsString = updateSelectedSeatsDisplay();
+
+
+    function confirmSeats() {
+      if (selectedSeats.length === 0) {
+        alert("Please select at least one seat.");
+      } else {
+        // You can perform further actions here when seats are confirmed.
+        alert("You have confirmed the following seats: " + selectedSeats.join(", "));
+      }
+    }
+
+
+        </script>
+
+
+
+
+
+
+    <!-- ... Your existing JavaScript code ... -->
+<script>
+var selectedSeats = []; // Array to store selected seat IDs
+
+// Get the list of booked seats from the Django context
+var bookedSeats = [{% for seat in booked_seats %}"{{ seat }}",{% endfor %}];
+
+// Function to toggle seat selection
+function toggleSeat(seat) {
+  seat.classList.toggle("selected");
+  var seatId = seat.id;
+
+  // Check if the seat ID is in the array
+  var index = selectedSeats.indexOf(seatId);
+  if (index !== -1) {
+    // If already selected, remove it from the array
+    selectedSeats.splice(index, 1);
+  } else {
+    // If not selected, add it to the array
+    selectedSeats.push(seatId);
+  }
+
+  // Check if the seat is booked and change its color
+  if (bookedSeats.includes(seatId)) {
+    seat.style.backgroundColor = "red";
+  } else {
+    seat.style.backgroundColor = ""; // Reset the background color
+  }
+
+  // Update the selected seats display
+  updateSelectedSeatsDisplay();
+}
+
+// Function to update the selected seats display
+function updateSelectedSeatsDisplay() {
+  var selectedSeatsDisplay = document.getElementById("selectedSeats");
+  var selectedSeatsInput = document.getElementById("selectedSeatsInput");
+  selectedSeatsDisplay.textContent = "Selected Seats: " + selectedSeats.join(", ");
+  selectedSeatsInput.value = selectedSeats.join(", ");
+}
+
+// Function to confirm seats
+function confirmSeats() {
+  if (selectedSeats.length === 0) {
+    alert("Please select at least one seat.");
+  } else {
+    // You can perform further actions here when seats are confirmed.
+    alert("You have confirmed the following seats: " + selectedSeats.join(", "));
+  }
+}
+
+// Initial seat color based on booked seats
+var seatElements = document.querySelectorAll(".seat");
+seatElements.forEach(function(seat) {
+  var seatId = seat.id;
+  if (bookedSeats.includes(seatId)) {
+    seat.style.backgroundColor = "#df1616";
+  }
+});
+
+</script>
+<!-- ... Your existing JavaScript code ... -->
+
+    </center>
+</form>
+</body>
+</html>

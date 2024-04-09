@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+  <style>
+    .nav-item:hover{background-color:orange;border-radius:6px}
+  </style>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+  <!-- Mobile Metas -->
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+  <!-- Site Metas -->
+  <meta content="" name="keywords" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
+  <link href="{% static 'index/images/icons8-ticket-48.png' %}" rel="shortcut icon" type="image/x-icon">
+
+  <title>
+    SeatWise
+  </title>
+
+  <!-- slider stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- bootstrap core css -->
+  <link href="{% static 'index/css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'index/css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'index/css/responsive.css' %}" rel="stylesheet" />
+</head>
+
+<body style="background-image: url('{% static 'images/114.jpg' %}')">
+  <div class="hero_area" >
+    <!-- header section strats -->
+    <header class="header_section" >
+      <nav class="navbar navbar-expand-lg custom_nav-container " >
+        <a class="navbar-brand" href="index.html" >
+          <span>
+            SeatWise
+          </span>
+        </a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+          <span class=""></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color:black;">
+          <ul class="navbar-nav  ">
+                    <li class="nav-item ">
+                        <a class="nav-link active" href="http://127.0.0.1:8000/seatwiseapp/index/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/seatwiseapp/carddisplay/">
+                            Movies
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="http://127.0.0.1:8000/seatwiseapp/test/">Tickets <span class="sr-only"></span></a>
+                    </li>
+
+                </ul>
+
+        </div>
+      </nav>
+    </header>
+    <!-- end header section -->
+  </div>
+
+<!--CARD-->
+<div class="container" >
+  <div class="row">
+    {% for i,j,k,l in list %}
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <div class="card" style="width:221px;margin-top:15px;border-radius:8px;background-color:black">
+        <img src="{% static i %}" class="card-img-top" alt="..." style="height:330px;width:220px;border-radius:7px">
+        <div class="card-body">
+           <h5 class="card-title" style="color:white">{{ j }}</h5>
+           <p class="card-text" style="color:white">{{ k }}</p>
+           <a href="http://127.0.0.1:8000/seatwiseapp/movieview/{{ l }}" class="btn btn-primary">Book Tickets</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="info_section  layout_padding2-top" style="margin-top:25px">
+    <div class="social_container">
+      <div class="social_box">
+        <a href="">
+          <i aria-hidden="true" class="fa fa-facebook"></i>
+        </a>
+        <a href="">
+          <i aria-hidden="true" class="fa fa-twitter"></i>
+        </a>
+        <a href="">
+          <i aria-hidden="true" class="fa fa-instagram"></i>
+        </a>
+        <a href="">
+          <i aria-hidden="true" class="fa fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+    <div class="info_container ">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-3">
+            <h6>
+              ABOUT US
+            </h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,
+            </p>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="info_form ">
+              <h5>
+                Newsletter
+              </h5>
+              <form action="#">
+                <input placeholder="Enter your email" type="email">
+                <button>
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h6>
+              NEED HELP
+            </h6>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet, consectetur adipiscing elit, sed doLorem ipsum dolor sit amet,
+            </p>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <h6>
+              CONTACT US
+            </h6>
+            <div class="info_link-box">
+              <a href="">
+                <i aria-hidden="true" class="fa fa-map-marker"></i>
+                <span> Gb road 123 london Uk </span>
+              </a>
+              <a href="">
+                <i aria-hidden="true" class="fa fa-phone"></i>
+                <span>+01 12345678901</span>
+              </a>
+              <a href="">
+                <i aria-hidden="true" class="fa fa-envelope"></i>
+                <span> demo@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer section -->
+    <footer class=" footer_section">
+      <div class="container">
+        <p>
+          &copy; <span id="displayYear"></span> All Rights Reserved By
+          <a href="https://html.design/">Seatwise</a>
+        </p>
+      </div>
+    </footer>
+    <!-- footer section -->
+
+  </section>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
